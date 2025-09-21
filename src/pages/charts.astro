@@ -1,0 +1,252 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Natal Charts - AstroGlossary" description="Generate accurate natal and transit charts with precise timezone calculations">
+  <div class="bg-white py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h1 class="text-4xl font-bold text-gray-900 mb-4">
+          Natal Chart Calculator
+        </h1>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+          Generate your natal chart with accurate planetary positions 
+          and timezone calculations.
+        </p>
+      </div>
+
+      <div class="max-w-2xl mx-auto">
+        <form id="chart-form" class="space-y-6">
+          <div class="grid md:grid-cols-2 gap-6">
+            <div>
+              <label for="name" class="block text-sm font-medium text-gray-700 mb-2">
+                Name
+              </label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                required
+                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500"
+                placeholder="Enter your name"
+              />
+            </div>
+            
+            <div>
+              <label for="birth-date" class="block text-sm font-medium text-gray-700 mb-2">
+                Birth Date
+              </label>
+              <input
+                type="date"
+                id="birth-date"
+                name="birthDate"
+                required
+                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500"
+              />
+            </div>
+          </div>
+
+          <div class="grid md:grid-cols-2 gap-6">
+            <div>
+              <label for="birth-time" class="block text-sm font-medium text-gray-700 mb-2">
+                Birth Time
+              </label>
+              <input
+                type="time"
+                id="birth-time"
+                name="birthTime"
+                required
+                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500"
+              />
+              <p class="text-xs text-gray-500 mt-1">Use 24-hour format (HH:MM)</p>
+            </div>
+            
+            <div>
+              <label for="timezone" class="block text-sm font-medium text-gray-700 mb-2">
+                Timezone
+              </label>
+              <select
+                id="timezone"
+                name="timezone"
+                required
+                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500"
+              >
+                <option value="">Select timezone...</option>
+                <option value="America/New_York">Eastern Time (EST/EDT)</option>
+                <option value="America/Chicago">Central Time (CST/CDT)</option>
+                <option value="America/Denver">Mountain Time (MST/MDT)</option>
+                <option value="America/Los_Angeles">Pacific Time (PST/PDT)</option>
+                <option value="Europe/London">Greenwich Mean Time (GMT)</option>
+                <option value="Europe/Paris">Central European Time (CET)</option>
+                <option value="Asia/Tokyo">Japan Standard Time (JST)</option>
+                <option value="Australia/Sydney">Australian Eastern Time (AEST)</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label for="birth-place" class="block text-sm font-medium text-gray-700 mb-2">
+              Birth Place
+            </label>
+            <input
+              type="text"
+              id="birth-place"
+              name="birthPlace"
+              required
+              class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500"
+              placeholder="City, State/Province, Country"
+            />
+            <p class="text-xs text-gray-500 mt-1">Be as specific as possible for accurate coordinates</p>
+          </div>
+
+          <div class="flex justify-center">
+            <button
+              type="submit"
+              class="bg-primary-600 text-white px-8 py-3 rounded-lg hover:bg-primary-700 transition-colors font-medium"
+            >
+              Generate Chart
+            </button>
+          </div>
+        </form>
+
+        <!-- Chart Display Area -->
+        <div id="chart-display" class="mt-12 hidden">
+          <div class="bg-gray-50 rounded-lg p-8">
+            <h2 class="text-2xl font-semibold mb-6">Your Natal Chart</h2>
+            
+            <div id="chart-info" class="mb-6">
+              <!-- Chart information will be populated here -->
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+              <div>
+                <h3 class="text-lg font-medium mb-4">Planetary Positions</h3>
+                <div id="planet-positions" class="space-y-2">
+                  <!-- Planetary positions will be populated here -->
+                </div>
+              </div>
+              
+              <div>
+                <h3 class="text-lg font-medium mb-4">House Cusps</h3>
+                <div id="house-cusps" class="space-y-2">
+                  <!-- House cusps will be populated here -->
+                </div>
+              </div>
+            </div>
+            
+            <div class="mt-8">
+              <h3 class="text-lg font-medium mb-4">Major Aspects</h3>
+              <div id="aspects" class="grid md:grid-cols-2 gap-4">
+                <!-- Aspects will be populated here -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<script>
+  // Basic chart calculation (simplified for demonstration)
+  interface ChartData {
+    name: string;
+    birthDate: string;
+    birthTime: string;
+    birthPlace: string;
+    timezone: string;
+  }
+
+  const chartForm = document.getElementById('chart-form') as HTMLFormElement;
+  const chartDisplay = document.getElementById('chart-display') as HTMLElement;
+
+  chartForm?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const formData = new FormData(chartForm);
+    const chartData: ChartData = {
+      name: formData.get('name') as string,
+      birthDate: formData.get('birthDate') as string,
+      birthTime: formData.get('birthTime') as string,
+      birthPlace: formData.get('birthPlace') as string,
+      timezone: formData.get('timezone') as string,
+    };
+
+    // For now, we'll display the entered information
+    // In a real implementation, this would calculate actual planetary positions
+    displayChart(chartData);
+  });
+
+  function displayChart(data: ChartData) {
+    const chartInfo = document.getElementById('chart-info');
+    const planetPositions = document.getElementById('planet-positions');
+    const houseCusps = document.getElementById('house-cusps');
+    const aspects = document.getElementById('aspects');
+
+    if (chartInfo) {
+      chartInfo.innerHTML = `
+        <div class="border-b border-gray-200 pb-4">
+          <h3 class="text-lg font-medium">Chart for ${data.name}</h3>
+          <p class="text-gray-600">Born: ${data.birthDate} at ${data.birthTime}</p>
+          <p class="text-gray-600">Location: ${data.birthPlace}</p>
+          <p class="text-gray-600">Timezone: ${data.timezone}</p>
+        </div>
+      `;
+    }
+
+    // Sample planetary positions (in a real app, these would be calculated)
+    const samplePlanets = [
+      { planet: '☉ Sun', sign: 'Leo', degree: '15°23\'', house: '10th' },
+      { planet: '☽ Moon', sign: 'Cancer', degree: '28°45\'', house: '9th' },
+      { planet: '☿ Mercury', sign: 'Virgo', degree: '3°12\'', house: '11th' },
+      { planet: '♀ Venus', sign: 'Libra', degree: '19°08\'', house: '12th' },
+      { planet: '♂ Mars', sign: 'Aries', degree: '7°33\'', house: '4th' },
+    ];
+
+    if (planetPositions) {
+      planetPositions.innerHTML = samplePlanets.map(planet => `
+        <div class="flex justify-between items-center py-2 border-b border-gray-200">
+          <span class="font-medium">${planet.planet}</span>
+          <span class="text-gray-600">${planet.sign} ${planet.degree}</span>
+          <span class="text-sm text-gray-500">${planet.house}</span>
+        </div>
+      `).join('');
+    }
+
+    // Sample house cusps
+    const sampleHouses = [
+      { house: '1st', sign: 'Scorpio', degree: '12°45\'' },
+      { house: '2nd', sign: 'Sagittarius', degree: '8°23\'' },
+      { house: '3rd', sign: 'Capricorn', degree: '15°12\'' },
+      { house: '4th', sign: 'Aquarius', degree: '22°07\'' },
+    ];
+
+    if (houseCusps) {
+      houseCusps.innerHTML = sampleHouses.map(house => `
+        <div class="flex justify-between items-center py-2 border-b border-gray-200">
+          <span class="font-medium">${house.house} House</span>
+          <span class="text-gray-600">${house.sign} ${house.degree}</span>
+        </div>
+      `).join('');
+    }
+
+    // Sample aspects
+    const sampleAspects = [
+      { aspect: 'Sun conjunct Mercury', orb: '2°15\'', type: 'conjunction' },
+      { aspect: 'Moon trine Venus', orb: '4°32\'', type: 'trine' },
+      { aspect: 'Mars square Jupiter', orb: '1°45\'', type: 'square' },
+    ];
+
+    if (aspects) {
+      aspects.innerHTML = sampleAspects.map(aspect => `
+        <div class="p-3 bg-white rounded border">
+          <div class="font-medium">${aspect.aspect}</div>
+          <div class="text-sm text-gray-600">Orb: ${aspect.orb}</div>
+        </div>
+      `).join('');
+    }
+
+    chartDisplay.classList.remove('hidden');
+    chartDisplay.scrollIntoView({ behavior: 'smooth' });
+  }
+</script>

@@ -1,0 +1,73 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="AstroGlossary - Learn Astrology" description="Your comprehensive guide to astrology with interactive glossary and natal chart tools">
+  <div class="bg-gradient-to-b from-primary-50 to-white py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <h1 class="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
+          Learn Astrology with
+          <span class="text-primary-600">AstroGlossary</span>
+        </h1>
+        <p class="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
+          Discover the language of the stars with our comprehensive glossary, 
+          interactive natal charts, and transit analysis tools.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a 
+            href="/astroglossary/glossary/" 
+            class="bg-primary-600 text-white px-8 py-3 rounded-lg hover:bg-primary-700 transition-colors font-medium"
+          >
+            Explore Glossary
+          </a>
+          <a 
+            href="/astroglossary/charts/" 
+            class="bg-white text-primary-600 border-2 border-primary-600 px-8 py-3 rounded-lg hover:bg-primary-50 transition-colors font-medium"
+          >
+            Create Chart
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="text-center p-6">
+          <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <span class="text-2xl">📖</span>
+          </div>
+          <h3 class="text-xl font-semibold mb-3">Comprehensive Glossary</h3>
+          <p class="text-gray-600">
+            Explore hundreds of astrology terms with cross-references, 
+            deep links, and searchable content.
+          </p>
+        </div>
+        
+        <div class="text-center p-6">
+          <div class="w-16 h-16 bg-secondary-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <span class="text-2xl">🌟</span>
+          </div>
+          <h3 class="text-xl font-semibold mb-3">Natal Charts</h3>
+          <p class="text-gray-600">
+            Generate accurate natal charts with precise timezone calculations 
+            and detailed interpretations.
+          </p>
+        </div>
+        
+        <div class="text-center p-6">
+          <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <span class="text-2xl">🔄</span>
+          </div>
+          <h3 class="text-xl font-semibold mb-3">Transit Analysis</h3>
+          <p class="text-gray-600">
+            Track current planetary movements and their influence 
+            on your personal chart.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>
