@@ -1,0 +1,14 @@
+title: "Astroglossary"
+description: "A glossary of astronomy/astrology terms."
+# Use the default GitHub Pages-supported theme
+theme: minima
+
+# Project site settings
+baseurl: "/astroglossary"
+url: "https://kimmiikaze.github.io"
+
+# Repo metadata
+repository: "kimmiikaze/astroglossary"
+
+# Build settings
+markdown: kramdown
